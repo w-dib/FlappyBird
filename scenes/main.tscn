@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://wrve0lft5xus"]
+[gd_scene load_steps=9 format=3 uid="uid://wrve0lft5xus"]
 
 [ext_resource type="Texture2D" uid="uid://ci384bm3qltht" path="res://assets/sprites/background-dubai.png" id="1_0vd4t"]
 [ext_resource type="Script" path="res://scenes/ParallaxLayer.gd" id="1_1rupl"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_mett3"]
 [ext_resource type="Texture2D" uid="uid://dnx8fdxe1h3fp" path="res://assets/sprites/base.png" id="4_tuqeo"]
 [ext_resource type="PackedScene" uid="uid://bqvnwmfjacomf" path="res://pipes.tscn" id="6_2wifp"]
+[ext_resource type="PackedScene" uid="uid://bsevyi06vuqbj" path="res://background_music.tscn" id="7_hp3u7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fi6r"]
 size = Vector2(336, 112)
@@ -51,4 +52,7 @@ autostart = true
 
 [node name="Pipes" parent="." instance=ExtResource("6_2wifp")]
 
+[node name="BackgroundMusic" parent="." instance=ExtResource("7_hp3u7")]
+
+[connection signal="touch" from="Player" to="." method="_on_player_touch"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

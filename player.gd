@@ -1,15 +1,23 @@
 extends CharacterBody2D
 
-const JUMP_VELOCITY = -400.0
 @onready var move = $Move
 
-var gravity = 980
+const JUMP_VELOCITY = -400.0
+const gravity = 980
 var tween
 
+signal touch
+
 func _physics_process(delta):
+		velocity.x = 0
 		velocity.y += gravity * delta
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_VELOCITY
 			var tween = create_tween()
 			tween.tween_property(move, "playing",true, 0.1)	
 		move_and_slide()
+
+
+func _on_area_2d_body_entered(body):
+	print("Test")
+	touch.emit()
