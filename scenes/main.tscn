@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://wrve0lft5xus"]
+[gd_scene load_steps=11 format=3 uid="uid://wrve0lft5xus"]
 
 [ext_resource type="Texture2D" uid="uid://ci384bm3qltht" path="res://assets/sprites/background-dubai.png" id="1_0vd4t"]
 [ext_resource type="Script" path="res://scenes/ParallaxLayer.gd" id="1_1rupl"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bqvnwmfjacomf" path="res://pipes.tscn" id="6_2wifp"]
 [ext_resource type="PackedScene" uid="uid://bsevyi06vuqbj" path="res://background_music.tscn" id="7_hp3u7"]
 [ext_resource type="Texture2D" uid="uid://cx8ayom1orvvv" path="res://assets/sprites/gameover.png" id="8_2wkmi"]
+[ext_resource type="Texture2D" uid="uid://cn003evrw4wdg" path="res://assets/sprites/message.png" id="9_7f6bi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fi6r"]
 size = Vector2(336, 112)
@@ -28,7 +29,7 @@ script = ExtResource("1_1rupl")
 texture = ExtResource("1_0vd4t")
 
 [node name="Player" parent="." instance=ExtResource("1_eejl4")]
-position = Vector2(110, 173)
+position = Vector2(110, 197)
 collision_mask = 2
 
 [node name="Ground" type="StaticBody2D" parent="."]
@@ -57,6 +58,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="GameOver" type="TextureRect" parent="GUI"]
+visible = false
+z_index = 3
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -70,6 +73,22 @@ offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_2wkmi")
+
+[node name="StartGame" type="TextureRect" parent="GUI"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -133.5
+offset_right = 92.0
+offset_bottom = 133.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_7f6bi")
 
 [connection signal="touch" from="Player" to="." method="_on_player_touch"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
