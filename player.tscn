@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://8py0unc782ba"]
+
+[ext_resource type="Texture2D" uid="uid://di6a80qkuod08" path="res://assets/sprites/yellowbird-midflap.png" id="1_psgaa"]
+[ext_resource type="Texture2D" uid="uid://djmhl1huu5x5u" path="res://assets/sprites/yellowbird-downflap.png" id="2_yrqxs"]
+[ext_resource type="Texture2D" uid="uid://55hvbj4sr0gf" path="res://assets/sprites/yellowbird-upflap.png" id="3_n516k"]
+
+[sub_resource type="Animation" id="Animation_lsxqm"]
+resource_name = "flying"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_yrqxs"), ExtResource("1_psgaa"), ExtResource("3_n516k"), ExtResource("1_psgaa")]
+}
+
+[sub_resource type="Animation" id="Animation_87r7p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_psgaa")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4fiax"]
+_data = {
+"RESET": SubResource("Animation_87r7p"),
+"flying": SubResource("Animation_lsxqm")
+}
+
+[node name="Player" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_psgaa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+autoplay = "flying"
+libraries = {
+"": SubResource("AnimationLibrary_4fiax")
+}
