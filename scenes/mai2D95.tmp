@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://wrve0lft5xus"]
+
+[ext_resource type="Texture2D" uid="uid://ci384bm3qltht" path="res://assets/sprites/background-dubai.png" id="1_0vd4t"]
+[ext_resource type="Script" path="res://scenes/ParallaxLayer.gd" id="1_1rupl"]
+[ext_resource type="PackedScene" uid="uid://8py0unc782ba" path="res://player.tscn" id="1_eejl4"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_mett3"]
+[ext_resource type="Texture2D" uid="uid://dnx8fdxe1h3fp" path="res://assets/sprites/base.png" id="4_tuqeo"]
+[ext_resource type="PackedScene" uid="uid://bqvnwmfjacomf" path="res://pipes.tscn" id="6_2wifp"]
+[ext_resource type="PackedScene" uid="uid://bsevyi06vuqbj" path="res://background_music.tscn" id="7_hp3u7"]
+[ext_resource type="Texture2D" uid="uid://cx8ayom1orvvv" path="res://assets/sprites/gameover.png" id="8_2wkmi"]
+[ext_resource type="Texture2D" uid="uid://cn003evrw4wdg" path="res://assets/sprites/message.png" id="9_7f6bi"]
+[ext_resource type="FontFile" uid="uid://bqv8d1pftjqqk" path="res://assets/flappy-font.ttf" id="10_hlyuk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fi6r"]
+size = Vector2(336, 112)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_mett3")
+pipes = ExtResource("6_2wifp")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(144, 256)
+transform = Transform2D(1, 0, 0, 1, 144, 256)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(512, 0)
+script = ExtResource("1_1rupl")
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_0vd4t")
+
+[node name="Player" parent="." instance=ExtResource("1_eejl4")]
+position = Vector2(110, 197)
+collision_mask = 2
+
+[node name="Ground" type="StaticBody2D" parent="."]
+z_index = 1
+position = Vector2(144, 456)
+collision_layer = 2
+
+[node name="Base" type="Sprite2D" parent="Ground"]
+texture = ExtResource("4_tuqeo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_7fi6r")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[node name="BackgroundMusic" parent="." instance=ExtResource("7_hp3u7")]
+
+[node name="GUI" type="Control" parent="."]
+z_index = 4
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GameOver" type="TextureRect" parent="GUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -16.0
+offset_right = 96.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_2wkmi")
+
+[node name="StartGame" type="TextureRect" parent="GUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.0
+offset_top = -133.5
+offset_right = 92.0
+offset_bottom = 133.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_7f6bi")
+
+[node name="Label" type="Label" parent="GUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.05
+anchor_right = 0.1
+anchor_bottom = 0.05
+offset_left = 3.2
+offset_top = -1.6
+offset_right = 71.2
+offset_bottom = 31.4
+theme_override_colors/font_outline_color = Color(0.329412, 0.219608, 0.278431, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("10_hlyuk")
+theme_override_font_sizes/font_size = 30
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="touch" from="Player" to="." method="_on_player_touch"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

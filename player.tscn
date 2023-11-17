@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://8py0unc782ba"]
+[gd_scene load_steps=12 format=3 uid="uid://8py0unc782ba"]
 
 [ext_resource type="Texture2D" uid="uid://di6a80qkuod08" path="res://assets/sprites/yellowbird-midflap.png" id="1_psgaa"]
 [ext_resource type="Script" path="res://player.gd" id="1_xeuv5"]
@@ -48,6 +48,8 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_gq5sb"]
 radius = 19.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_seuau"]
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xeuv5")
 
@@ -72,6 +74,9 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_gq5sb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_seuau")
 
 [connection signal="finished" from="Death" to="." method="_on_death_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
