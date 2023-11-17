@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://8py0unc782ba"]
+[gd_scene load_steps=9 format=3 uid="uid://8py0unc782ba"]
 
 [ext_resource type="Texture2D" uid="uid://di6a80qkuod08" path="res://assets/sprites/yellowbird-midflap.png" id="1_psgaa"]
+[ext_resource type="Script" path="res://player.gd" id="1_xeuv5"]
 [ext_resource type="Texture2D" uid="uid://djmhl1huu5x5u" path="res://assets/sprites/yellowbird-downflap.png" id="2_yrqxs"]
 [ext_resource type="Texture2D" uid="uid://55hvbj4sr0gf" path="res://assets/sprites/yellowbird-upflap.png" id="3_n516k"]
 
@@ -42,13 +43,21 @@ _data = {
 "flying": SubResource("Animation_lsxqm")
 }
 
-[node name="Player" type="Node"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_gq5sb"]
+radius = 14.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_xeuv5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_psgaa")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
 autoplay = "flying"
 libraries = {
 "": SubResource("AnimationLibrary_4fiax")
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gq5sb")
