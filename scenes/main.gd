@@ -1,6 +1,11 @@
 extends Node
+@onready var player = $Player
+@onready var game_over = $GUI/GameOver
 
 @export var pipes: PackedScene
+
+func _ready():
+	game_over.hide()
 
 func spawn_pipe():
 	var pipe = pipes.instantiate()
@@ -12,4 +17,6 @@ func _on_timer_timeout():
 
 
 func _on_player_touch():
-	print("Test")
+	game_over.show()
+	player.queue_free()
+	

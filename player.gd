@@ -13,11 +13,10 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_VELOCITY
-			var tween = create_tween()
+			tween = create_tween()
 			tween.tween_property(move, "playing",true, 0.1)	
 		move_and_slide()
 
 
 func _on_area_2d_body_entered(body):
-	print("Test")
 	touch.emit()

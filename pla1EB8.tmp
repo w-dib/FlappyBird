@@ -60,6 +60,9 @@ libraries = {
 "": SubResource("AnimationLibrary_4fiax")
 }
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gq5sb")
+
 [node name="Move" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_fyy1d")
 
