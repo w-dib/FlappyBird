@@ -8,7 +8,6 @@ extends Node
 func _ready():
 	game_over.hide()
 	player.set_physics_process(false)
-#	player.hide()
 
 func spawn_pipe():
 	if not start_game.visible:
@@ -25,6 +24,8 @@ func _on_player_touch():
 	player.queue_free()
 	
 func _unhandled_input(event):
+	if event.is_action_pressed("jump") and game_over.visible:
+		get_tree().reload_current_scene()
 	if event.is_action_pressed("jump") and start_game.visible:
 		start_game.hide()
 		player.set_physics_process(true)
