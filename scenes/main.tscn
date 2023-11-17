@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://wrve0lft5xus"]
+[gd_scene load_steps=7 format=3 uid="uid://wrve0lft5xus"]
 
 [ext_resource type="Texture2D" uid="uid://ci384bm3qltht" path="res://assets/sprites/background-dubai.png" id="1_0vd4t"]
 [ext_resource type="Script" path="res://scenes/ParallaxLayer.gd" id="1_1rupl"]
 [ext_resource type="PackedScene" uid="uid://8py0unc782ba" path="res://player.tscn" id="1_eejl4"]
+[ext_resource type="Script" path="res://scenes/ParallaxForeground.gd" id="3_qsdfc"]
+[ext_resource type="Texture2D" uid="uid://dnx8fdxe1h3fp" path="res://assets/sprites/base.png" id="4_tuqeo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8hf4"]
+size = Vector2(336, 112)
 
 [node name="Main" type="Node"]
 
@@ -17,6 +22,25 @@ script = ExtResource("1_1rupl")
 [node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource("1_0vd4t")
 
+[node name="ParallaxForeground" type="ParallaxBackground" parent="."]
+offset = Vector2(144, 400)
+transform = Transform2D(1, 0, 0, 1, 144, 400)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxForeground"]
+position = Vector2(0, 56)
+motion_mirroring = Vector2(336, 0)
+script = ExtResource("3_qsdfc")
+
+[node name="Area2D" type="Area2D" parent="ParallaxForeground/ParallaxLayer"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Base" type="Sprite2D" parent="ParallaxForeground/ParallaxLayer/Area2D"]
+texture = ExtResource("4_tuqeo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxForeground/ParallaxLayer/Area2D"]
+shape = SubResource("RectangleShape2D_a8hf4")
+
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -27,5 +51,6 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_eejl4")]
-position = Vector2(144, 173)
+position = Vector2(110, 173)
+collision_mask = 2
 metadata/_edit_lock_ = true
