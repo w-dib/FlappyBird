@@ -46,7 +46,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_gq5sb"]
 radius = 14.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xeuv5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

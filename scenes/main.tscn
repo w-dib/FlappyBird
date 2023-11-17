@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://wrve0lft5xus"]
+[gd_scene load_steps=4 format=3 uid="uid://wrve0lft5xus"]
 
+[ext_resource type="Texture2D" uid="uid://ci384bm3qltht" path="res://assets/sprites/background-dubai.png" id="1_0vd4t"]
+[ext_resource type="Script" path="res://scenes/ParallaxLayer.gd" id="1_1rupl"]
 [ext_resource type="PackedScene" uid="uid://8py0unc782ba" path="res://player.tscn" id="1_eejl4"]
 
 [node name="Main" type="Node"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2(144, 256)
+transform = Transform2D(1, 0, 0, 1, 144, 256)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(512, 0)
+script = ExtResource("1_1rupl")
+
+[node name="Background" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("1_0vd4t")
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3
@@ -11,6 +24,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
-[node name="Sprite2D" parent="." instance=ExtResource("1_eejl4")]
+[node name="Player" parent="." instance=ExtResource("1_eejl4")]
 position = Vector2(144, 173)
+metadata/_edit_lock_ = true
