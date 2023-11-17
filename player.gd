@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var move = $Move
+@onready var death = $Death
 
 const JUMP_VELOCITY = -400.0
 const gravity = 980
@@ -19,4 +20,8 @@ func _physics_process(delta):
 
 
 func _on_area_2d_body_entered(_body):
+	death.play()
+
+func _on_death_finished():
 	touch.emit()
+	queue_free()

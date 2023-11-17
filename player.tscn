@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://8py0unc782ba"]
+[gd_scene load_steps=11 format=3 uid="uid://8py0unc782ba"]
 
 [ext_resource type="Texture2D" uid="uid://di6a80qkuod08" path="res://assets/sprites/yellowbird-midflap.png" id="1_psgaa"]
 [ext_resource type="Script" path="res://player.gd" id="1_xeuv5"]
 [ext_resource type="Texture2D" uid="uid://djmhl1huu5x5u" path="res://assets/sprites/yellowbird-downflap.png" id="2_yrqxs"]
 [ext_resource type="Texture2D" uid="uid://55hvbj4sr0gf" path="res://assets/sprites/yellowbird-upflap.png" id="3_n516k"]
 [ext_resource type="AudioStream" uid="uid://dloqj30pcbmb6" path="res://assets/audio/wing.wav" id="5_fyy1d"]
+[ext_resource type="AudioStream" uid="uid://b6lsro6l4sfva" path="res://assets/audio/die.wav" id="6_fpvsd"]
 
 [sub_resource type="Animation" id="Animation_lsxqm"]
 resource_name = "flying"
@@ -63,10 +64,14 @@ libraries = {
 [node name="Move" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_fyy1d")
 
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_fpvsd")
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_gq5sb")
 
+[connection signal="finished" from="Death" to="." method="_on_death_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

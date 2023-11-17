@@ -21,7 +21,6 @@ func _on_timer_timeout():
 
 func _on_player_touch():
 	game_over.show()
-	player.queue_free()
 	
 func _unhandled_input(event):
 	if event.is_action_pressed("jump") and game_over.visible:
