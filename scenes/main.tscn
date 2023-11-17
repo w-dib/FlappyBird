@@ -13,6 +13,7 @@ size = Vector2(336, 112)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_mett3")
+pipes = ExtResource("6_2wifp")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 offset = Vector2(144, 256)
@@ -38,6 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+z_index = 1
 position = Vector2(144, 456)
 collision_layer = 2
 
@@ -48,9 +50,8 @@ texture = ExtResource("4_tuqeo")
 shape = SubResource("RectangleShape2D_7fi6r")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
 autostart = true
-
-[node name="Pipes" parent="." instance=ExtResource("6_2wifp")]
 
 [node name="BackgroundMusic" parent="." instance=ExtResource("7_hp3u7")]
 

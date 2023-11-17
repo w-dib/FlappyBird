@@ -1,12 +1,14 @@
 extends Node
 
-@onready var pipes = preload("res://pipes.tscn")
+@export var pipes: PackedScene
 
-#func _process(delta):
-#	if not pipes. 
-
+func spawn_pipe():
+	var pipe = pipes.instantiate()
+	pipe.position.y = randi_range(-184,-10)
+	add_child(pipe)
+#
 func _on_timer_timeout():
-	pass # Replace with function body.
+	spawn_pipe()
 
 
 func _on_player_touch():
